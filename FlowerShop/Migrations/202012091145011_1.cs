@@ -54,7 +54,7 @@
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Packaging", t => t.Packaging_Id, cascadeDelete: true)
-                .Index(t => t.Packaging_Id);
+                .Index(t => t.Id);
             
             CreateTable(
                 "dbo.Packaging",

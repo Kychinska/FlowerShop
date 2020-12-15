@@ -11,7 +11,7 @@ namespace FlowerShop.Data.Entities
     {
         public List<ProductFlower> Flowers { get; set; }
         public int Id { get; set; }   
-        public ProductPackaging Packaging { get; set; }
+        public  ProductPackaging Packaging { get; set; }
         public int PackagingId { get; set; }
         public string Message { get; set; }
        

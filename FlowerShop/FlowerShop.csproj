@@ -42,6 +42,18 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC3.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -54,8 +66,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Data\Entities\Bouquet\Bouquet.cs" />
     <Compile Include="Data\Entities\Order\BouquetInOrder.cs" />
     <Compile Include="Data\Entities\Order\Client.cs" />
@@ -64,7 +80,6 @@
     <Compile Include="Data\Entities\Order\Order.cs" />
     <Compile Include="Data\Entities\Packaging.cs" />
     <Compile Include="Data\Entities\Bouquet\ProductPackaging.cs" />
-    <Compile Include="Data\Entities\PriceComponent.cs" />
     <Compile Include="Data\Entities\Bouquet\ProductFlower.cs" />
     <Compile Include="Data\Entities\PriceList.cs" />
     <Compile Include="Data\Entities\Storage\FlowerInStorage.cs" />
@@ -74,28 +89,38 @@
     <Compile Include="Data\Repositories\IFlowerRepository.cs" />
     <Compile Include="Data\Repositories\IOrderRepository.cs" />
     <Compile Include="Data\Repositories\IPackagingRepository.cs" />
+    <Compile Include="Data\Repositories\IProductFlowerRepository.cs" />
     <Compile Include="Domain\Interfaces\IOrderService.cs" />
+    <Compile Include="Domain\Interfaces\IProduct.cs" />
     <Compile Include="Domain\Interfaces\IStorage.cs" />
+    <Compile Include="Domain\Interfaces\IUser.cs" />
     <Compile Include="EF\FlowerShopContext.cs" />
     <Compile Include="EF\Repositories\BouquetRepository.cs" />
     <Compile Include="EF\Repositories\FlowerRepository.cs" />
     <Compile Include="EF\Repositories\OrderRepository.cs" />
     <Compile Include="EF\Repositories\PackagingRepository.cs" />
+    <Compile Include="EF\Repositories\ProductFlowerRepository.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202012091145011_1.cs" />
     <Compile Include="Migrations\202012091145011_1.designer.cs">
       <DependentUpon>202012091145011_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012151623572_3.cs" />
+    <Compile Include="Migrations\202012151623572_3.designer.cs">
+      <DependentUpon>202012151623572_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012151655065_4.cs" />
+    <Compile Include="Migrations\202012151655065_4.designer.cs">
+      <DependentUpon>202012151655065_4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012151732183_5.cs" />
+    <Compile Include="Migrations\202012151732183_5.designer.cs">
+      <DependentUpon>202012151732183_5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -105,6 +130,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012091145011_1.resx">
       <DependentUpon>202012091145011_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012151623572_3.resx">
+      <DependentUpon>202012151623572_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012151655065_4.resx">
+      <DependentUpon>202012151655065_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012151732183_5.resx">
+      <DependentUpon>202012151732183_5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

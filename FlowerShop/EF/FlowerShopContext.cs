@@ -30,6 +30,8 @@ namespace FlowerShop.EF
         
             modelBuilder.Entity<BouquetInOrder>().HasRequired(b => b.Order).WithMany(o => o.BouquetInOrders).HasForeignKey(b => b.OrderId);
             modelBuilder.Entity<FlowerInOrder>().HasRequired(b=>b.Order).WithMany(o => o.FlowerInOrders).HasForeignKey(b => b.OrderId);
+            modelBuilder.Entity<FlowerPrice>();
+            modelBuilder.Entity<PackagingPrice>();
         }
     }
 }

@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 
 namespace FlowerShop.Data.Entities
 {
-    public class PriceList
-    {
-        public List<FlowerPrice> FlowersPrice { get; set; }
-        public List<PackagingPrice> PackagingPrice{ get; set; }
-    }
     public class FlowerPrice
-    {
+    {   
+        public int Id { get; set; }   
         public int FlowerId { get; set; }
         public decimal PriceFlower { get; set; }
+        public int Number { get; set; }
     }
     public class PackagingPrice
     {
+        public int Id { get; set; }
         public int PackagingId { get; set; }
         public decimal PricePackaging { get; set; }
+        public int Number { get; set; }
     }
 }
