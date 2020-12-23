@@ -8,7 +8,6 @@ namespace FlowerShop.Data.Entities
 {
     public class ProductFlower
     {
-        public Flower Flower { get; set; }
         public int Number { get; set; }
         public int Id { get; set; }
         public int FlowerId { get; set; }

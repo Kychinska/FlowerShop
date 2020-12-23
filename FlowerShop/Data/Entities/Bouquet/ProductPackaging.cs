@@ -9,7 +9,7 @@ namespace FlowerShop.Data.Entities
     public class ProductPackaging
     {
         public int Id { get; set; }
-        public Packaging Packaging { get; set; }
+        public int PackagingId { get; set; }
         public Bouquet Bouquet { get; set; }
     }
 }

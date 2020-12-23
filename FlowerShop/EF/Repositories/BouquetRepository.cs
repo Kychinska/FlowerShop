@@ -24,7 +24,7 @@ namespace FlowerShop.EF.Repositories
         {
             using (var ctx = new FlowerShopContext())
             {
-                return ctx.Bouquets.Where(b => b.Id == id).Single();
+                return ctx.Bouquets.Include("Flowers").Where(b => b.Id == id).Single();
             }
         }
 
@@ -35,7 +35,15 @@ namespace FlowerShop.EF.Repositories
                 return ctx.Bouquets.ToList();
             }
         }
-
+       public int AddBouquet_GetId(Bouquet bouquet)
+        {
+            using (var ctx = new FlowerShopContext())
+            {   
+                ctx.Bouquets.Add(bouquet);
+                ctx.SaveChanges();
+                return ctx.Bouquets.Count();
+            }
+        }
         public void RemoveBouquet(int id)
         {
             using (var ctx = new FlowerShopContext())

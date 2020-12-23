@@ -18,20 +18,18 @@ namespace FlowerShop.EF
         public DbSet <ProductFlower> ProductFlowers { get; set; }
         public DbSet<ProductPackaging> ProductPackaging { get; set; }
         public DbSet<Order> Orders { get; set; }
-
+        public DbSet<FlowerPrice> FlowerPrices { get; set; }
+        public DbSet<PackagingPrice> PackagingPrices { get; set; }
+        public DbSet<BouquetInOrder> BouquetsInOrder { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
-            modelBuilder.Entity<Bouquet>().HasMany(b => b.Flowers).WithRequired(p => p.Bouquet);
+            modelBuilder.Entity<ProductFlower>().HasRequired(f => f.Bouquet).WithMany(b => b.Flowers);
             modelBuilder.Entity<Bouquet>().HasRequired(b => b.Packaging).WithOptional(p => p.Bouquet);
-            modelBuilder.Entity<ProductFlower>().HasRequired(p => p.Flower);
-            modelBuilder.Entity<ProductPackaging>().HasRequired(p => p.Packaging);
-        
             modelBuilder.Entity<BouquetInOrder>().HasRequired(b => b.Order).WithMany(o => o.BouquetInOrders).HasForeignKey(b => b.OrderId);
-            modelBuilder.Entity<FlowerInOrder>().HasRequired(b=>b.Order).WithMany(o => o.FlowerInOrders).HasForeignKey(b => b.OrderId);
             modelBuilder.Entity<FlowerPrice>();
             modelBuilder.Entity<PackagingPrice>();
+           
         }
     }
 }

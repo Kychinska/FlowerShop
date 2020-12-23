@@ -14,14 +14,11 @@ D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\EntityFramework.xml
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\EntityFramework.SqlServer.xml
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.csproj.CopyComplete
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._1.resources
-D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\Microsoft.Web.Infrastructure.dll
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\Ninject.dll
-D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\Ninject.Web.Common.dll
-D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\Ninject.Web.Mvc.dll
-D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\WebActivatorEx.dll
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\Ninject.xml
-D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\Ninject.Web.Common.xml
-D:\1\3 курс\Proga\FlowerShop\FlowerShop\bin\Debug\Ninject.Web.Mvc.xml
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._3.resources
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._4.resources
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._5.resources
+D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._7.resources
+D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._6.resources
+D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._8.resources
