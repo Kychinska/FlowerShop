@@ -35,7 +35,8 @@ namespace FlowerShop.Domain.DefaultImplementations
             client.Phone = phone;
             order.DeliveryDate = deliveryDate;
             order.BouquetInOrders = bouquetInOrders;
-            order.Price = _orderPrice.OrderPrice(order);
+            order.Price = _orderPrice.CalculateOrderPrice(order);
+            order.Client = client;
             return order; 
         }
 

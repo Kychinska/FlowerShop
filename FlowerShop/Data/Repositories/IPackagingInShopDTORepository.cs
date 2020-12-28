@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace FlowerShop.Data.Repositories
 {
-    public interface IOrderRepository
+    public interface IPackagingInShopDTORepository
     {
-        Order GetOrder(int orderId);
-        void AddOrder(Order order);
-        void RemoveOrder(int orderId);
+        List<PackagingInShopDTO> GetAvailablePackagings();
     }
 }

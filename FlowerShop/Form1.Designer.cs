@@ -29,22 +29,10 @@
         private void InitializeComponent()
         {
             this.dataGridViewPacking = new System.Windows.Forms.DataGridView();
-            this.PackId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Material = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Colour = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PackNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AddInBoquet = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label_Flowers = new System.Windows.Forms.Label();
             this.label_Packagings = new System.Windows.Forms.Label();
             this.button_CreateBoquet = new System.Windows.Forms.Button();
             this.dataGridViewFlowers = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlowerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlowerPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FlowerColour = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AddInBouquet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox_Message = new System.Windows.Forms.TextBox();
             this.Message = new System.Windows.Forms.Label();
             this.dateTimePicker_DeliveryDate = new System.Windows.Forms.DateTimePicker();
@@ -64,10 +52,22 @@
             this.label_FirstName = new System.Windows.Forms.Label();
             this.label_BouquetsInOrder = new System.Windows.Forms.Label();
             this.dataGridView_BouquetInOrder = new System.Windows.Forms.DataGridView();
-            this.label_DeliveryDate = new System.Windows.Forms.Label();
             this.BooquetId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BooquetsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalBouquetPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label_DeliveryDate = new System.Windows.Forms.Label();
+            this.PackId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Material = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Colour = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PackNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddInBoquet = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FlowerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FlowerPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FlowerColour = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddInBouquet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPacking)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlowers)).BeginInit();
             this.groupBox_CreateBouquet.SuspendLayout();
@@ -96,49 +96,6 @@
             this.dataGridViewPacking.Size = new System.Drawing.Size(813, 235);
             this.dataGridViewPacking.TabIndex = 2;
             this.dataGridViewPacking.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPacking_CellContentClick);
-            // 
-            // PackId
-            // 
-            this.PackId.HeaderText = "PackId";
-            this.PackId.MinimumWidth = 6;
-            this.PackId.Name = "PackId";
-            this.PackId.Width = 80;
-            // 
-            // Material
-            // 
-            this.Material.HeaderText = "Material";
-            this.Material.MinimumWidth = 6;
-            this.Material.Name = "Material";
-            this.Material.Width = 125;
-            // 
-            // Colour
-            // 
-            this.Colour.HeaderText = "Colour";
-            this.Colour.MinimumWidth = 6;
-            this.Colour.Name = "Colour";
-            this.Colour.Width = 125;
-            // 
-            // Price
-            // 
-            this.Price.HeaderText = "Price";
-            this.Price.MinimumWidth = 6;
-            this.Price.Name = "Price";
-            this.Price.Width = 80;
-            // 
-            // PackNumber
-            // 
-            this.PackNumber.HeaderText = "PackNumber";
-            this.PackNumber.MinimumWidth = 6;
-            this.PackNumber.Name = "PackNumber";
-            this.PackNumber.Width = 125;
-            // 
-            // AddInBoquet
-            // 
-            this.AddInBoquet.HeaderText = "AddInBoquet";
-            this.AddInBoquet.MinimumWidth = 6;
-            this.AddInBoquet.Name = "AddInBoquet";
-            this.AddInBoquet.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.AddInBoquet.Width = 125;
             // 
             // label_Flowers
             // 
@@ -187,50 +144,6 @@
             this.dataGridViewFlowers.RowTemplate.Height = 24;
             this.dataGridViewFlowers.Size = new System.Drawing.Size(807, 226);
             this.dataGridViewFlowers.TabIndex = 1;
-            // 
-            // Id
-            // 
-            this.Id.HeaderText = "Id";
-            this.Id.MinimumWidth = 6;
-            this.Id.Name = "Id";
-            this.Id.Width = 50;
-            // 
-            // FlowerName
-            // 
-            this.FlowerName.HeaderText = "FlowerName";
-            this.FlowerName.MinimumWidth = 6;
-            this.FlowerName.Name = "FlowerName";
-            this.FlowerName.Width = 125;
-            // 
-            // FlowerPrice
-            // 
-            this.FlowerPrice.HeaderText = "FlowerPrice";
-            this.FlowerPrice.MinimumWidth = 6;
-            this.FlowerPrice.Name = "FlowerPrice";
-            this.FlowerPrice.Width = 125;
-            // 
-            // FlowerColour
-            // 
-            this.FlowerColour.HeaderText = "FlowerColour";
-            this.FlowerColour.MinimumWidth = 6;
-            this.FlowerColour.Name = "FlowerColour";
-            this.FlowerColour.Width = 125;
-            // 
-            // Number
-            // 
-            this.Number.HeaderText = "Number";
-            this.Number.MinimumWidth = 6;
-            this.Number.Name = "Number";
-            this.Number.Width = 50;
-            // 
-            // AddInBouquet
-            // 
-            this.AddInBouquet.HeaderText = "AddInBouquet";
-            this.AddInBouquet.MinimumWidth = 6;
-            this.AddInBouquet.Name = "AddInBouquet";
-            this.AddInBouquet.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.AddInBouquet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.AddInBouquet.Width = 125;
             // 
             // textBox_Message
             // 
@@ -419,15 +332,6 @@
             this.dataGridView_BouquetInOrder.Size = new System.Drawing.Size(587, 361);
             this.dataGridView_BouquetInOrder.TabIndex = 11;
             // 
-            // label_DeliveryDate
-            // 
-            this.label_DeliveryDate.AutoSize = true;
-            this.label_DeliveryDate.Location = new System.Drawing.Point(308, 429);
-            this.label_DeliveryDate.Name = "label_DeliveryDate";
-            this.label_DeliveryDate.Size = new System.Drawing.Size(93, 17);
-            this.label_DeliveryDate.TabIndex = 10;
-            this.label_DeliveryDate.Text = "DeliveryDate:";
-            // 
             // BooquetId
             // 
             this.BooquetId.HeaderText = "BooquetId";
@@ -448,6 +352,102 @@
             this.TotalBouquetPrice.MinimumWidth = 6;
             this.TotalBouquetPrice.Name = "TotalBouquetPrice";
             this.TotalBouquetPrice.Width = 125;
+            // 
+            // label_DeliveryDate
+            // 
+            this.label_DeliveryDate.AutoSize = true;
+            this.label_DeliveryDate.Location = new System.Drawing.Point(308, 429);
+            this.label_DeliveryDate.Name = "label_DeliveryDate";
+            this.label_DeliveryDate.Size = new System.Drawing.Size(93, 17);
+            this.label_DeliveryDate.TabIndex = 10;
+            this.label_DeliveryDate.Text = "DeliveryDate:";
+            // 
+            // PackId
+            // 
+            this.PackId.HeaderText = "PackId";
+            this.PackId.MinimumWidth = 6;
+            this.PackId.Name = "PackId";
+            this.PackId.Width = 80;
+            // 
+            // Material
+            // 
+            this.Material.HeaderText = "Material";
+            this.Material.MinimumWidth = 6;
+            this.Material.Name = "Material";
+            this.Material.Width = 125;
+            // 
+            // Colour
+            // 
+            this.Colour.HeaderText = "Color";
+            this.Colour.MinimumWidth = 6;
+            this.Colour.Name = "Colour";
+            this.Colour.Width = 125;
+            // 
+            // Price
+            // 
+            this.Price.HeaderText = "Price";
+            this.Price.MinimumWidth = 6;
+            this.Price.Name = "Price";
+            this.Price.Width = 80;
+            // 
+            // PackNumber
+            // 
+            this.PackNumber.HeaderText = "PackNumber";
+            this.PackNumber.MinimumWidth = 6;
+            this.PackNumber.Name = "PackNumber";
+            this.PackNumber.Width = 125;
+            // 
+            // AddInBoquet
+            // 
+            this.AddInBoquet.HeaderText = "AddInBoquet";
+            this.AddInBoquet.MinimumWidth = 6;
+            this.AddInBoquet.Name = "AddInBoquet";
+            this.AddInBoquet.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.AddInBoquet.Width = 125;
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.MinimumWidth = 6;
+            this.Id.Name = "Id";
+            this.Id.Width = 50;
+            // 
+            // FlowerName
+            // 
+            this.FlowerName.HeaderText = "FlowerName";
+            this.FlowerName.MinimumWidth = 6;
+            this.FlowerName.Name = "FlowerName";
+            this.FlowerName.Width = 125;
+            // 
+            // FlowerPrice
+            // 
+            this.FlowerPrice.HeaderText = "FlowerPrice";
+            this.FlowerPrice.MinimumWidth = 6;
+            this.FlowerPrice.Name = "FlowerPrice";
+            this.FlowerPrice.Width = 125;
+            // 
+            // FlowerColour
+            // 
+            this.FlowerColour.HeaderText = "FlowerColor";
+            this.FlowerColour.MinimumWidth = 6;
+            this.FlowerColour.Name = "FlowerColour";
+            this.FlowerColour.Width = 125;
+            // 
+            // Number
+            // 
+            this.Number.HeaderText = "Number";
+            this.Number.MinimumWidth = 6;
+            this.Number.Name = "Number";
+            this.Number.Width = 50;
+            // 
+            // AddInBouquet
+            // 
+            this.AddInBouquet.HeaderText = "AddInBouquet";
+            this.AddInBouquet.MinimumWidth = 6;
+            this.AddInBouquet.Name = "AddInBouquet";
+            this.AddInBouquet.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.AddInBouquet.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.AddInBouquet.Width = 125;
             // 
             // Form1
             // 
@@ -477,18 +477,6 @@
         private System.Windows.Forms.Label label_Packagings;
         private System.Windows.Forms.Button button_CreateBoquet;
         private System.Windows.Forms.DataGridView dataGridViewFlowers;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FlowerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FlowerPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FlowerColour;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AddInBouquet;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PackId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Material;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Colour;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PackNumber;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn AddInBoquet;
         private System.Windows.Forms.TextBox textBox_Message;
         private System.Windows.Forms.Label Message;
         private System.Windows.Forms.DateTimePicker dateTimePicker_DeliveryDate;
@@ -512,6 +500,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BooquetId;
         private System.Windows.Forms.DataGridViewTextBoxColumn BooquetsNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalBouquetPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PackId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Material;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Colour;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PackNumber;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn AddInBoquet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FlowerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FlowerPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FlowerColour;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AddInBouquet;
     }
 }
 

@@ -12,7 +12,6 @@ namespace FlowerShop.Data.Repositories
         void AddBouquet(Bouquet bouquet);
         void RemoveBouquet (int id);
         Bouquet Get(int id);
-        List<Bouquet> GetAllBouquets();
-        int AddBouquet_GetId(Bouquet bouquet);
+
     }
 }

@@ -67,15 +67,18 @@
     <Compile Include="Data\Entities\Packaging.cs" />
     <Compile Include="Data\Entities\Bouquet\ProductPackaging.cs" />
     <Compile Include="Data\Entities\Bouquet\ProductFlower.cs" />
+    <Compile Include="Data\Entities\PackagingInShopDTO.cs" />
     <Compile Include="Data\Entities\PriceList.cs" />
     <Compile Include="Data\Entities\Storage\FlowerInStorage.cs" />
     <Compile Include="Data\Entities\Storage\PackagingInStorage.cs" />
     <Compile Include="Data\Entities\Storage\Storage.cs" />
-    <Compile Include="Data\Repositories\IBouquetInOrderRepository.cs" />
+    <Compile Include="Data\Entities\FlowerInShopDTO.cs" />
     <Compile Include="Data\Repositories\IBouquetRepository.cs" />
+    <Compile Include="Data\Repositories\IFlowerInShopDTORepository.cs" />
     <Compile Include="Data\Repositories\IFlowerPriceRepository.cs" />
     <Compile Include="Data\Repositories\IFlowerRepository.cs" />
     <Compile Include="Data\Repositories\IOrderRepository.cs" />
+    <Compile Include="Data\Repositories\IPackagingInShopDTORepository.cs" />
     <Compile Include="Data\Repositories\IPackagingPriceRepository.cs" />
     <Compile Include="Data\Repositories\IPackagingRepository.cs" />
     <Compile Include="Data\Repositories\IProductFlowerRepository.cs" />
@@ -88,11 +91,12 @@
     <Compile Include="Domain\Interfaces\IBoquetPrice.cs" />
     <Compile Include="Domain\Interfaces\IUser.cs" />
     <Compile Include="EF\FlowerShopContext.cs" />
-    <Compile Include="EF\Repositories\BouquetInOrderRepository.cs" />
     <Compile Include="EF\Repositories\BouquetRepository.cs" />
+    <Compile Include="EF\Repositories\FlowerInShopDTORepository.cs" />
     <Compile Include="EF\Repositories\FlowerPriceRepository.cs" />
     <Compile Include="EF\Repositories\FlowerRepository.cs" />
     <Compile Include="EF\Repositories\OrderRepository.cs" />
+    <Compile Include="EF\Repositories\PackagingInShopDTORepository.cs" />
     <Compile Include="EF\Repositories\PackagingPriceRepository.cs" />
     <Compile Include="EF\Repositories\PackagingRepository.cs" />
     <Compile Include="EF\Repositories\ProductFlowerRepository.cs" />
@@ -131,6 +135,14 @@
     <Compile Include="Migrations\202012221716574_8.designer.cs">
       <DependentUpon>202012221716574_8.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012271441289_9.cs" />
+    <Compile Include="Migrations\202012271441289_9.designer.cs">
+      <DependentUpon>202012271441289_9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012271450587_10.cs" />
+    <Compile Include="Migrations\202012271450587_10.designer.cs">
+      <DependentUpon>202012271450587_10.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -157,6 +169,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202012221716574_8.resx">
       <DependentUpon>202012221716574_8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012271441289_9.resx">
+      <DependentUpon>202012271441289_9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012271450587_10.resx">
+      <DependentUpon>202012271450587_10.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

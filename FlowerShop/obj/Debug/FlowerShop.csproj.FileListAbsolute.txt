@@ -22,3 +22,5 @@ D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._5.r
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._7.resources
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._6.resources
 D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._8.resources
+D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._9.resources
+D:\1\3 курс\Proga\FlowerShop\FlowerShop\obj\Debug\FlowerShop.Migrations._10.resources

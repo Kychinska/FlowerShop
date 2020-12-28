@@ -10,7 +10,7 @@ namespace FlowerShop.Domain.Interfaces
 {
     public interface IOrderPrice
     {
-       decimal OrderPrice(Order order);
+       decimal CalculateOrderPrice(Order order);
 
     }
 }

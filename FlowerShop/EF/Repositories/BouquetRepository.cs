@@ -15,6 +15,7 @@ namespace FlowerShop.EF.Repositories
         {
             using(var ctx = new FlowerShopContext())
             {
+                bouquet.DateTimeOfCreateBouquet = DateTime.Now;
                 ctx.Bouquets.Add(bouquet);
                 ctx.SaveChanges();
             }
@@ -28,22 +29,6 @@ namespace FlowerShop.EF.Repositories
             }
         }
 
-        public List<Bouquet> GetAllBouquets()
-        {
-            using (var ctx = new FlowerShopContext())
-            {
-                return ctx.Bouquets.ToList();
-            }
-        }
-       public int AddBouquet_GetId(Bouquet bouquet)
-        {
-            using (var ctx = new FlowerShopContext())
-            {   
-                ctx.Bouquets.Add(bouquet);
-                ctx.SaveChanges();
-                return ctx.Bouquets.Count();
-            }
-        }
         public void RemoveBouquet(int id)
         {
             using (var ctx = new FlowerShopContext())

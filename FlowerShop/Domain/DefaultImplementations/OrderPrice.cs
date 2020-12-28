@@ -10,7 +10,7 @@ namespace FlowerShop.Domain.DefaultImplementations
 {
     public class OrderPrice : IOrderPrice
     {
-        decimal IOrderPrice.OrderPrice(Order order)
+        decimal IOrderPrice.CalculateOrderPrice(Order order)
         {
             decimal price = 0;
             for(int i = 0; i<order.BouquetInOrders.Count();i++)

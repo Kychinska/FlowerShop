@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using FlowerShop.Data.Repositories;
 using FlowerShop.Domain.Interfaces;
 using FlowerShop.Data.Entities;
+using FlowerShop.Data;
 
 namespace FlowerShop
 {
@@ -17,17 +18,19 @@ namespace FlowerShop
         protected IProductPackagingRepository _productPackagingRepository;
         protected IPackagingRepository _packagingRepository;
         protected IBoquetPrice _boquetPrice;
-        protected IBouquetInOrderRepository _bouquetInOrderRepository;
         protected IOrderRepository _orderRepository;
         protected ICreate _create;
+        protected IFlowerInShopDTORepository _flowerInShopDTORepository;
+        protected IPackagingInShopDTORepository _packagingInShopDTORepository;
         protected List<BouquetInOrder> _BouquetInOrder;
         public Form1(IFlowerRepository flowerRepository,
                         IProductFlowerRepository productFlowerRepository,
                         IBouquetRepository bouquetRepository,
                         IPackagingRepository packagingRepository,
                         IProductPackagingRepository productPackagingRepository,IBoquetPrice boquetPrice,
-                        IBouquetInOrderRepository bouquetInOrderRepository,
-                        ICreate create,IOrderRepository orderRepository)
+                        ICreate create,IOrderRepository orderRepository, 
+                        IFlowerInShopDTORepository flowerInShopDTORepository,
+                        IPackagingInShopDTORepository packagingInShopDTORepository)
         {
             _flowerRepository = flowerRepository;
             _productFlowerRepository = productFlowerRepository;
@@ -35,59 +38,40 @@ namespace FlowerShop
             _packagingRepository = packagingRepository;
             _productPackagingRepository = productPackagingRepository;
             _boquetPrice = boquetPrice;
-            _bouquetInOrderRepository = bouquetInOrderRepository;
             _orderRepository = orderRepository;
             _create = create;
+            _flowerInShopDTORepository = flowerInShopDTORepository;
+            _packagingInShopDTORepository = packagingInShopDTORepository;
             _BouquetInOrder = new List<BouquetInOrder>();
+
             InitializeComponent();
             LoadData();
         }
 
         private void LoadData()
         {
-            string connectionString = "Server=localhost\\sqlexpress;Database=FlowersShop;Integrated Security=true;";
-             SqlConnection myConnection = new SqlConnection(connectionString);
-            myConnection.Open();
-            string query = "Select Flower.Id ,Name,FlowerPrice.PriceFlower,Color, Number From Flower LEFT JOIN FlowerPrice on dbo.Flower.Id = FlowerPrice.FlowerId";
-            SqlCommand command = new SqlCommand(query, myConnection);
-            SqlDataReader reader = command.ExecuteReader();
-            List<string[]> data = new List<string[]>();
-            while (reader.Read())
+            List <FlowerInShopDTO> flowersInShop = _flowerInShopDTORepository.GetNotAvailableFlowers();
+            for(int i=0; i<flowersInShop.Count;i++)
             {
-                data.Add(new string[5]);
-                data[data.Count - 1][0] = reader[0].ToString();
-                data[data.Count - 1][1] = reader[1].ToString();
-                data[data.Count - 1][2] = reader[2].ToString();
-                data[data.Count - 1][3] = reader[3].ToString();
-                data[data.Count - 1][4] = reader[4].ToString();
-            }
-            reader.Close();
-            myConnection.Close();
-            foreach (string[] s in data)              
-                dataGridViewFlowers.Rows.Add(s);
-            myConnection.Open();
-            
-            query = "Select PackagingId, Material, Color, Packaging.Price, Number From Packaging LEFT JOIN PackagingPrice on Packaging.Id = PackagingPrice.PackagingId";
-            command = new SqlCommand(query, myConnection);
-            reader = command.ExecuteReader();
-            data = new List<string[]>();
-            while (reader.Read())
-            {
-                data.Add(new string[5]);
-                data[data.Count - 1][0] = reader[0].ToString();
-                data[data.Count - 1][1] = reader[1].ToString();
-                data[data.Count - 1][2] = reader[2].ToString();
-                data[data.Count - 1][3] = reader[3].ToString();
-                data[data.Count - 1][4] = reader[4].ToString();
-            }
-            reader.Close();
-            myConnection.Close();
-            foreach (string[] s in data)             
-                dataGridViewPacking.Rows.Add(s);
-            for (int i = 0; i < dataGridViewFlowers.Rows.Count; i++)
+                dataGridViewFlowers.Rows.Add();
+                dataGridViewFlowers.Rows[i].Cells[0].Value = flowersInShop[i].FlowerId;
+                dataGridViewFlowers.Rows[i].Cells[1].Value = flowersInShop[i].FlowerName;
+                dataGridViewFlowers.Rows[i].Cells[2].Value = flowersInShop[i].FlowerPrice;
+                dataGridViewFlowers.Rows[i].Cells[3].Value = flowersInShop[i].Color;
+                dataGridViewFlowers.Rows[i].Cells[4].Value = flowersInShop[i].FlowerNumber;
                 dataGridViewFlowers.Rows[i].Cells[5].Value = 0;
-            for (int j = 0; j < dataGridViewPacking.Rows.Count; j++)
+            }
+            List<PackagingInShopDTO> packagingsInShop = _packagingInShopDTORepository.GetAvailablePackagings();
+            for(int j=0; j<packagingsInShop.Count; j++)
+            {
+                dataGridViewPacking.Rows.Add();
+                dataGridViewPacking.Rows[j].Cells[0].Value = packagingsInShop[j].PackagingId;
+                dataGridViewPacking.Rows[j].Cells[1].Value = packagingsInShop[j].Material;
+                dataGridViewPacking.Rows[j].Cells[2].Value = packagingsInShop[j].Color;
+                dataGridViewPacking.Rows[j].Cells[3].Value = packagingsInShop[j].Price;
+                dataGridViewPacking.Rows[j].Cells[4].Value = packagingsInShop[j].PackagingNumber;
                 dataGridViewPacking.Rows[j].Cells[5].Value = false;
+            }            
         }
 
         private void button_CreateBoquet_Click(object sender, EventArgs e)
@@ -116,16 +100,18 @@ namespace FlowerShop
                 }
             }
             Bouquet bouquet = _create.CreateBouquet(FlowerId, FlowerNumber, PackagingId, textBox_Message.Text);
+
             if (bouquet.Flowers.Count() > 0)
             {
                 _bouquetRepository.AddBouquet(bouquet);
                 MessageBox.Show("Add bouquet");
-                int bouquetsNumber;
-                if (textBox_NumberOfBouquets.Text == string.Empty)
-                   bouquetsNumber = 1;
-                else 
-                   bouquetsNumber = Convert.ToInt32(textBox_NumberOfBouquets.Text);
-                
+                int bouquetsNumber= Convert.ToInt32(textBox_NumberOfBouquets.Text);
+
+                if (bouquetsNumber < 1)
+                { 
+                    bouquetsNumber = 1; 
+                }
+                                
                 BouquetInOrder bouquetInOrder = _create.CreateBouquetInOrder(bouquet, bouquetsNumber);
 
                 _BouquetInOrder.Add(bouquetInOrder);
@@ -151,10 +137,6 @@ namespace FlowerShop
         {
             Order order = _create.CreateOrder(_BouquetInOrder,dateTimePicker_DeliveryDate.Value,textBox_FirstName.Text, textBox_LastName.Text,textBox_DeliveryAddress.Text,textBox_Phone.Text);
             _orderRepository.AddOrder(order);
-            for (int i=0; i< order.BouquetInOrders.Count;i++)
-            {
-                _bouquetInOrderRepository.AddBouquetInOrder(order.BouquetInOrders[i]);
-            }
             string str = string.Format("Tour order id :{0} and order price: {1}", order.Id.ToString(), order.Price.ToString());
             MessageBox.Show(str);
         }

@@ -14,6 +14,7 @@ namespace FlowerShop.Data.Entities
         public  ProductPackaging Packaging { get; set; }
         public int PackagingId { get; set; }
         public string Message { get; set; }
-       
+        public DateTime DateTimeOfCreateBouquet { get; set; }
+
     }
 }

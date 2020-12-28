@@ -12,21 +12,12 @@ namespace FlowerShop.EF.Repositories
     {
         public void AddOrder(Order order)
         {
-           using(var ctx = new FlowerShopContext())
+            using (var ctx = new FlowerShopContext())
             {
                 ctx.Orders.Add(order);
                 ctx.SaveChanges();
             }
         }
-
-        public List<Order> GetAllOrders()
-        {
-            using(var ctx = new FlowerShopContext()) 
-            {
-                return ctx.Orders.ToList();
-            }
-        }
-
         public Order GetOrder(int orderId)
         {
             using (var ctx = new FlowerShopContext())
@@ -44,5 +35,7 @@ namespace FlowerShop.EF.Repositories
                 ctx.SaveChanges();
             }
         }
+
+        
     }
 }

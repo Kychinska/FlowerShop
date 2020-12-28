@@ -18,14 +18,6 @@ namespace FlowerShop.EF.Repositories
             }
         }
 
-        public List<FlowerPrice> GetAllFlowerPrices()
-        {
-            using (var ctx = new FlowerShopContext())
-            {
-                return ctx.FlowerPrices.ToList();
-            }
-        }
-    
         public FlowerPrice GetFlowerPrice(int flowerId)
         {
             using (var ctx = new FlowerShopContext())
