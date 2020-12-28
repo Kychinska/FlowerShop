@@ -83,10 +83,13 @@
     <Compile Include="Data\Repositories\IPackagingRepository.cs" />
     <Compile Include="Data\Repositories\IProductFlowerRepository.cs" />
     <Compile Include="Data\Repositories\IProductPackagingRepository.cs" />
+    <Compile Include="Domain\DefaultImplementations\BouquetFactory.cs" />
+    <Compile Include="Domain\DefaultImplementations\BouquetInOrderFactory.cs" />
     <Compile Include="Domain\DefaultImplementations\BouquetPrice.cs" />
     <Compile Include="Domain\DefaultImplementations\OrderFactory.cs" />
     <Compile Include="Domain\DefaultImplementations\OrderPrice.cs" />
-    <Compile Include="Domain\Interfaces\ICreate.cs" />
+    <Compile Include="Domain\Interfaces\IBouquetFactory.cs" />
+    <Compile Include="Domain\Interfaces\IBouquetInOrderFactory.cs" />
     <Compile Include="Domain\Interfaces\IOrderFactory.cs" />
     <Compile Include="Domain\Interfaces\IOrderPrice.cs" />
     <Compile Include="Domain\Interfaces\IBoquetPrice.cs" />

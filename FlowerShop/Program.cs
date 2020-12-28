@@ -28,9 +28,10 @@ namespace FlowerShop
             kernel.Bind<IBoquetPrice>().To<BouquetPrice>();
             kernel.Bind<IOrderPrice>().To<OrderPrice>();
             kernel.Bind<IOrderFactory>().To<OrderFactory>();
+            kernel.Bind<IBouquetFactory>().To<BouquetFactory>();
+            kernel.Bind<IBouquetInOrderFactory>().To<BouquetInOrderFactory>();
             kernel.Bind<IFlowerInShopDTORepository>().To<FlowerInShopDTORepository>();
             kernel.Bind<IPackagingInShopDTORepository>().To<PackagingInShopDTORepository>();
-
         }
     }
 

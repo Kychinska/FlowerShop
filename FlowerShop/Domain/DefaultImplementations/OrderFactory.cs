@@ -59,7 +59,7 @@ namespace FlowerShop.Domain.DefaultImplementations
             order.BouquetInOrders = bouquetsInOrder;
             order.Price = _orderPrice.CalculateOrderPrice(order);
             _orderRepository.AddOrder(order);
-          //  ChangeNumberOfFlowersInData(order);
+            ChangeNumberOfFlowersInData(order);
             ChangeNumberOfPackagingsInData(order);
             return order;
         }

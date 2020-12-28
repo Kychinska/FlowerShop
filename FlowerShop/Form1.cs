@@ -12,47 +12,38 @@ namespace FlowerShop
 {
     public partial class Form1 : Form, IUser
     {
+#region IFactories
         protected IOrderFactory _orderFactory;
-        protected IFlowerRepository _flowerRepository;
-        protected IProductFlowerRepository _productFlowerRepository;
-        protected IBouquetRepository _bouquetRepository;
-        protected IProductPackagingRepository _productPackagingRepository;
-        protected IPackagingRepository _packagingRepository;
-        protected IBoquetPrice _boquetPrice;
+        protected IBouquetFactory _bouquetFactory;
+        protected IBouquetInOrderFactory _bouquetInOrderFactory;
+#endregion
+#region IRepositories
         protected IFlowerInShopDTORepository _flowerInShopDTORepository;
         protected IPackagingInShopDTORepository _packagingInShopDTORepository;
         protected IFlowerPriceRepository _flowerPriceRepository;
         protected IPackagingPriceRepository _packagingPriceRepository;
-        protected List<BouquetInOrder> _BouquetInOrder;
-
-        public Form1(IFlowerRepository flowerRepository,
-                        IProductFlowerRepository productFlowerRepository,
-                        IBouquetRepository bouquetRepository,
-                        IPackagingRepository packagingRepository,
-                        IProductPackagingRepository productPackagingRepository,
-                        IBoquetPrice boquetPrice, IOrderFactory orderFactory,
+#endregion     
+        protected List<BouquetInOrder> _BouquetsInOrder;
+        public Form1(   IBouquetInOrderFactory bouquetInOrderFactory,
+                        IOrderFactory orderFactory,
+                        IBouquetFactory bouquetFactory,
                         IFlowerInShopDTORepository flowerInShopDTORepository,
                         IPackagingInShopDTORepository packagingInShopDTORepository,
-                        IFlowerPriceRepository flowerPriceRepository, IPackagingPriceRepository packagingPriceRepository)
+                        IFlowerPriceRepository flowerPriceRepository, 
+                        IPackagingPriceRepository packagingPriceRepository)
         {
-            _flowerRepository = flowerRepository;
-            _productFlowerRepository = productFlowerRepository;
-            _bouquetRepository = bouquetRepository;
-            _packagingRepository = packagingRepository;
-            _productPackagingRepository = productPackagingRepository;
-            _boquetPrice = boquetPrice;           
             _flowerInShopDTORepository = flowerInShopDTORepository;
-            _packagingInShopDTORepository = packagingInShopDTORepository;
-            _BouquetInOrder = new List<BouquetInOrder>();
-            _orderFactory = orderFactory;
+            _packagingInShopDTORepository = packagingInShopDTORepository;                       
             _flowerPriceRepository = flowerPriceRepository;
             _packagingPriceRepository = packagingPriceRepository;
-            InitializeComponent();
-           
-            LoadData();
-            
-        }
+            _orderFactory = orderFactory;
+            _bouquetFactory = bouquetFactory;
+            _bouquetInOrderFactory = bouquetInOrderFactory;
+            _BouquetsInOrder = new List<BouquetInOrder>();
 
+            InitializeComponent();           
+            LoadData();
+        }
         private void LoadData()
         {
             List <FlowerInShopDTO> flowersInShop = _flowerInShopDTORepository.GetAvailableFlowers();
@@ -80,13 +71,11 @@ namespace FlowerShop
                 dataGridViewPacking.Rows[j].Cells[5].Value = false;
             }            
         }
-
         private void button_CreateBoquet_Click(object sender, EventArgs e)
         {         
             int packagingId = 0;
             int flowerNumber;
-            Bouquet bouquet = new Bouquet();
-            bouquet.Flowers = new List<ProductFlower>();
+            List<ProductFlower> productFlowers = new List<ProductFlower>();
             for (int i = 0; i < dataGridViewFlowers.Rows.Count; i++)
             {
                 flowerNumber = Convert.ToInt32(dataGridViewFlowers[5, i].Value);
@@ -97,22 +86,8 @@ namespace FlowerShop
                         ProductFlower productFlower = new ProductFlower();
                         productFlower.FlowerId = Convert.ToInt32(dataGridViewFlowers[0, i].Value) ;
                         productFlower.Number = flowerNumber;
-                        bouquet.Flowers.Add(productFlower);
+                        productFlowers.Add(productFlower);
                     }
-                }
-            }
-            int bouquetsNumber = Convert.ToInt32(textBox_NumberOfBouquets.Text);
-            if (bouquetsNumber < 1)
-            {
-                bouquetsNumber = 1;
-            }
-            foreach(var flower in bouquet.Flowers )
-            {
-                int reqestedNumber = flower.Number * bouquetsNumber;
-                if (reqestedNumber >_flowerPriceRepository.GetAvailableFlowerNumber(flower.FlowerId))
-                {
-                    MessageBox.Show("Sorry, but we can`t to do so much bouqets");
-                    return;
                 }
             }
             for (int j = 0; j < dataGridViewPacking.Rows.Count; j++)
@@ -122,37 +97,51 @@ namespace FlowerShop
                     packagingId = Convert.ToInt32(dataGridViewPacking[0, j].Value);
                 }
             }
-            if(bouquetsNumber>_packagingPriceRepository.GetAvailablePacakagingNumber(packagingId))
-            {
-                MessageBox.Show("Sorry, but we can`t to do so much bouqets");
-                return;
-            }
             ProductPackaging productPackaging = new ProductPackaging();
             productPackaging.PackagingId = packagingId;
-            bouquet.Packaging = productPackaging;
-            bouquet.PackagingId = productPackaging.PackagingId;
-            bouquet.Message = textBox_Message.Text;
-
+            Bouquet bouquet = _bouquetFactory.CreateBouquet(productFlowers, textBox_Message.Text,productPackaging);
+            
+            int bouquetsNumber = Convert.ToInt32(textBox_NumberOfBouquets.Text);
+            if (CheckBouquetsNumber(bouquetsNumber,bouquet))
+            {
+                MessageBox.Show("Sorry, but we can`t to do so much bouqets");
+                textBox_NumberOfBouquets.Text = string.Empty;
+                return;
+            }
             if (bouquet.Flowers.Count() > 0)
             {
-                _bouquetRepository.AddBouquet(bouquet);
-                MessageBox.Show("Add bouquet");
-                
-                BouquetInOrder bouquetInOrder = new BouquetInOrder();
-                bouquetInOrder.BouquetId = bouquet.Id;
-                bouquetInOrder.Number = bouquetsNumber;
-                bouquetInOrder.Price = _boquetPrice.CalculateBouquetPrice(bouquetInOrder.BouquetId);
-                _BouquetInOrder.Add(bouquetInOrder);
+                _BouquetsInOrder.Add(_bouquetInOrderFactory.CreateBouquetInOrder(bouquet,bouquetsNumber));
             }
-            for(int j=0; j<_BouquetInOrder.Count;j++)
+            dataGridView_BouquetInOrder.Rows.Clear();
+            for(int j=0; j<_BouquetsInOrder.Count;j++)
             {
-                dataGridView_BouquetInOrder.Rows[j].Cells[0].Value = _BouquetInOrder[j].BouquetId;
-                dataGridView_BouquetInOrder.Rows[j].Cells[1].Value = _BouquetInOrder[j].Number;
-                dataGridView_BouquetInOrder.Rows[j].Cells[2].Value = _BouquetInOrder[j].Price;
+                dataGridView_BouquetInOrder.Rows[j].Cells[0].Value = _BouquetsInOrder[j].BouquetId;
+                dataGridView_BouquetInOrder.Rows[j].Cells[1].Value = _BouquetsInOrder[j].Number;
+                dataGridView_BouquetInOrder.Rows[j].Cells[2].Value = _BouquetsInOrder[j].Price;
+                dataGridView_BouquetInOrder.Rows[j].Cells[3].Value = _BouquetsInOrder[j].Price * _BouquetsInOrder[j].Number;
             }
             LoadData();
         }
-
+        private bool CheckBouquetsNumber(int bouquetsNumber, Bouquet bouquet)
+        {
+            if (bouquetsNumber < 1)
+            {
+                bouquetsNumber = 1;
+            }
+            foreach (var flower in bouquet.Flowers)
+            {
+                int requestedNumber = flower.Number * bouquetsNumber;
+                if (requestedNumber > _flowerPriceRepository.GetAvailableFlowerNumber(flower.FlowerId))
+                {
+                    return true;
+                }
+            }
+            if (bouquetsNumber > _packagingPriceRepository.GetAvailablePacakagingNumber(bouquet.PackagingId))
+            {                
+                return true;
+            }
+            return false;
+        }
         private void dataGridViewPacking_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             for (int i = 0; i < dataGridViewPacking.Rows.Count; i++)
@@ -169,8 +158,8 @@ namespace FlowerShop
             client.FirstName = textBox_FirstName.Text;
             client.LastName = textBox_LastName.Text;
             client.Phone = textBox_Phone.Text;
-            Order order = _orderFactory.CreateOrder(_BouquetInOrder, client, dateTimePicker_DeliveryDate.Value);
-            string str = string.Format("Tour order id :{0} and order price: {1}", order.Id.ToString(), order.Price.ToString());
+            Order order = _orderFactory.CreateOrder(_BouquetsInOrder, client, dateTimePicker_DeliveryDate.Value);
+            string str = string.Format("Your order id {0} and order price {1}", order.Id.ToString(), order.Price.ToString());
             MessageBox.Show(str);
         }
 

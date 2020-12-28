@@ -64,10 +64,11 @@
             this.label_FirstName = new System.Windows.Forms.Label();
             this.label_BouquetsInOrder = new System.Windows.Forms.Label();
             this.dataGridView_BouquetInOrder = new System.Windows.Forms.DataGridView();
+            this.label_DeliveryDate = new System.Windows.Forms.Label();
             this.BooquetId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BooquetsNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OneBouquetPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TotalBouquetPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label_DeliveryDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPacking)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFlowers)).BeginInit();
             this.groupBox_CreateBouquet.SuspendLayout();
@@ -411,13 +412,24 @@
             this.dataGridView_BouquetInOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.BooquetId,
             this.BooquetsNumber,
+            this.OneBouquetPrice,
             this.TotalBouquetPrice});
             this.dataGridView_BouquetInOrder.Location = new System.Drawing.Point(0, 47);
             this.dataGridView_BouquetInOrder.Name = "dataGridView_BouquetInOrder";
+            this.dataGridView_BouquetInOrder.RowHeadersVisible = false;
             this.dataGridView_BouquetInOrder.RowHeadersWidth = 51;
             this.dataGridView_BouquetInOrder.RowTemplate.Height = 24;
             this.dataGridView_BouquetInOrder.Size = new System.Drawing.Size(587, 361);
             this.dataGridView_BouquetInOrder.TabIndex = 11;
+            // 
+            // label_DeliveryDate
+            // 
+            this.label_DeliveryDate.AutoSize = true;
+            this.label_DeliveryDate.Location = new System.Drawing.Point(308, 429);
+            this.label_DeliveryDate.Name = "label_DeliveryDate";
+            this.label_DeliveryDate.Size = new System.Drawing.Size(93, 17);
+            this.label_DeliveryDate.TabIndex = 10;
+            this.label_DeliveryDate.Text = "DeliveryDate:";
             // 
             // BooquetId
             // 
@@ -433,21 +445,19 @@
             this.BooquetsNumber.Name = "BooquetsNumber";
             this.BooquetsNumber.Width = 125;
             // 
+            // OneBouquetPrice
+            // 
+            this.OneBouquetPrice.HeaderText = "OneBouquetPrice";
+            this.OneBouquetPrice.MinimumWidth = 6;
+            this.OneBouquetPrice.Name = "OneBouquetPrice";
+            this.OneBouquetPrice.Width = 125;
+            // 
             // TotalBouquetPrice
             // 
             this.TotalBouquetPrice.HeaderText = "TotalBouquetPrice";
             this.TotalBouquetPrice.MinimumWidth = 6;
             this.TotalBouquetPrice.Name = "TotalBouquetPrice";
             this.TotalBouquetPrice.Width = 125;
-            // 
-            // label_DeliveryDate
-            // 
-            this.label_DeliveryDate.AutoSize = true;
-            this.label_DeliveryDate.Location = new System.Drawing.Point(308, 429);
-            this.label_DeliveryDate.Name = "label_DeliveryDate";
-            this.label_DeliveryDate.Size = new System.Drawing.Size(93, 17);
-            this.label_DeliveryDate.TabIndex = 10;
-            this.label_DeliveryDate.Text = "DeliveryDate:";
             // 
             // Form1
             // 
@@ -497,9 +507,6 @@
         private System.Windows.Forms.Label label_Phone;
         private System.Windows.Forms.TextBox textBox_NumberOfBouquets;
         private System.Windows.Forms.Label label_NumberOfBouquets;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BooquetId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BooquetsNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TotalBouquetPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn PackId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Material;
         private System.Windows.Forms.DataGridViewTextBoxColumn Colour;
@@ -512,6 +519,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn FlowerColour;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn AddInBouquet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BooquetId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BooquetsNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OneBouquetPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalBouquetPrice;
     }
 }
 

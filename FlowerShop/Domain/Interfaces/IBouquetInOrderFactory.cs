@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using FlowerShop.Data.Entities;
 namespace FlowerShop.Domain.Interfaces
 {
-    public interface IBouquetFactory
+   public interface IBouquetInOrderFactory
     {
-        Bouquet CreateBouquet(List<ProductFlower> productFlowers, string message, ProductPackaging productPackaging);
+        BouquetInOrder CreateBouquetInOrder(Bouquet bouquet, int bouquetNumber);
     }
 }
