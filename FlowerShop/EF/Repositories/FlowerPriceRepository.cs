@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,18 @@ namespace FlowerShop.EF.Repositories
             {
                 ctx.FlowerPrices.Add(flowerPrice);
                 ctx.SaveChanges();
+            }
+        }
+
+        public int GetAvailableFlowerNumber(int flowerId)
+        {
+            using (var ctx = new FlowerShopContext())
+            {
+                int allFlowers= ctx.FlowerPrices.FirstOrDefault(f=> f.FlowerId==flowerId).Number;
+                int reservedFlowers = ctx.Bouquets.Where(b => DbFunctions.DiffMinutes(b.DateTimeOfCreateBouquet, DateTime.Now) < 20)
+                    .Where(b => !ctx.BouquetsInOrder.Any(bo => bo.BouquetId == b.Id)).SelectMany(b => b.Flowers).Where(f => f.FlowerId == flowerId).Select(f => f.Number)
+                    .DefaultIfEmpty(0).Sum();
+                return (allFlowers-reservedFlowers);
             }
         }
 

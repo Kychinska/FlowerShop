@@ -25,7 +25,7 @@ namespace FlowerShop.EF.Repositories
         {
             using (var ctx = new FlowerShopContext())
             {
-                return ctx.Bouquets.Include("Flowers").Where(b => b.Id == id).Single();
+                return ctx.Bouquets.Include("Flowers").Include("Packaging").Where(b => b.Id == id).Single();
             }
         }
 

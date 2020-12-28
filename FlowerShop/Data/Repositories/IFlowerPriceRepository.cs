@@ -13,5 +13,6 @@ namespace FlowerShop.Data.Repositories
         void RemoveFlowerPrice(int Id);
         FlowerPrice GetFlowerPrice(int flowerId);
         void Update(FlowerPrice flowerPrice);
+        int GetAvailableFlowerNumber(int flowerId);
     }
 }
