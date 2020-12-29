@@ -114,8 +114,9 @@ namespace FlowerShop
             }
             if (bouquet.Flowers.Count() > 0)
             {
-                _BouquetsInOrder.Add(_bouquetInOrderFactory.CreateBouquetInOrder(bouquet,bouquetsNumber));
                 _bouquetRepository.AddBouquet(bouquet);
+                _BouquetsInOrder.Add(_bouquetInOrderFactory.CreateBouquetInOrder(bouquet,bouquetsNumber));
+                
             }
             dataGridView_BouquetInOrder.Rows.Clear();
             for(int j=0; j<_BouquetsInOrder.Count;j++)
@@ -158,15 +159,19 @@ namespace FlowerShop
 
         private void button_ConfirmOrder_Click(object sender, EventArgs e)
         {
-            Client client = new Client();
-            client.DeliveryAddress = textBox_DeliveryAddress.Text;
-            client.FirstName = textBox_FirstName.Text;
-            client.LastName = textBox_LastName.Text;
-            client.Phone = textBox_Phone.Text;
-            Order order = _orderFactory.CreateOrder(_BouquetsInOrder, client, dateTimePicker_DeliveryDate.Value);
-            _orderRepository.AddOrder(order);
-            string str = string.Format("Your order id {0} and order price {1}", order.Id.ToString(), order.Price.ToString());
-            MessageBox.Show(str);
+            if (_BouquetsInOrder.Count > 0) 
+            { 
+                Client client = new Client();
+                client.DeliveryAddress = textBox_DeliveryAddress.Text;
+                client.FirstName = textBox_FirstName.Text;
+                client.LastName = textBox_LastName.Text;
+                client.Phone = textBox_Phone.Text;
+                Order order = _orderFactory.CreateOrder(_BouquetsInOrder, client, dateTimePicker_DeliveryDate.Value);
+                _orderRepository.AddOrder(order);
+                string str = string.Format("Your order id {0} and order price {1}", order.Id.ToString(), order.Price.ToString());
+                MessageBox.Show(str);
+            }
+            this.Close();
         }
 
         private void textBox_NumberOfBouquets_KeyPress(object sender, KeyPressEventArgs e)

@@ -9,7 +9,6 @@ namespace FlowerShop.Data.Repositories
 {
     public interface IOrderRepository
     {
-        Order GetOrder(int orderId);
         void AddOrder(Order order);
         void RemoveOrder(int orderId);
     }

@@ -31,15 +31,6 @@ namespace FlowerShop.EF.Repositories
                 return ctx.Flowers.Where(f => f.Id == id).Single();
             }
         }
-
-        public List<Flower> GetAllFlowers()
-        {
-            using (var ctx = new FlowerShopContext())
-            {
-                return ctx.Flowers.ToList();
-            }
-        }
-
         public void RemoveFlower(int id)
         {
             using (var ctx = new FlowerShopContext())

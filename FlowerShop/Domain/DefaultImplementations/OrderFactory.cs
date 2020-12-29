@@ -24,31 +24,6 @@ namespace FlowerShop.Domain.DefaultImplementations
             _orderPrice = orderPrice;
             _packagingPriceRepository = packagingPriceRepository;
         }
-        public void ChangeNumberOfFlowersInData(Order order)
-        {
-            for (int i = 0; i < order.BouquetInOrders.Count; i++)
-            {
-                Bouquet bouquet = _bouquetRepository.Get(order.BouquetInOrders[i].BouquetId);
-                for (int j = 0; j < bouquet.Flowers.Count; j++)
-                {
-                    FlowerShop.Data.Entities.FlowerPrice flower = _flowerPriceRepository.GetFlowerPrice(bouquet.Flowers[j].FlowerId);
-                    flower.Number=flower.Number - (bouquet.Flowers[j].Number * order.BouquetInOrders[i].Number);
-                    _flowerPriceRepository.Update(flower);
-                }
-            }
-        }
-
-        public void ChangeNumberOfPackagingsInData(Order order)
-        {
-            for (int i = 0; i < order.BouquetInOrders.Count; i++)
-            {
-                Bouquet bouquet = _bouquetRepository.Get(order.BouquetInOrders[i].BouquetId);
-                PackagingPrice packaging = _packagingPriceRepository.GetPackagingPrice(bouquet.Packaging.PackagingId);
-                packaging.Number = packaging.Number - 1;
-                _packagingPriceRepository.Update(packaging);
-            }
-        }
-
         public Order CreateOrder(List<BouquetInOrder> bouquetsInOrder,Client client, DateTime deliveryDate)
         {
             Order order = new Order();
@@ -56,8 +31,23 @@ namespace FlowerShop.Domain.DefaultImplementations
             order.DeliveryDate = deliveryDate;
             order.BouquetInOrders = bouquetsInOrder;
             order.Price = _orderPrice.CalculateOrderPrice(order);
-            ChangeNumberOfFlowersInData(order);
-            ChangeNumberOfPackagingsInData(order);
+            for (int i = 0; i < order.BouquetInOrders.Count; i++)
+            {
+                Bouquet bouquet = _bouquetRepository.Get(order.BouquetInOrders[i].BouquetId);
+                for (int j = 0; j < bouquet.Flowers.Count; j++)
+                {
+                    FlowerShop.Data.Entities.FlowerPrice flower = _flowerPriceRepository.GetFlowerPrice(bouquet.Flowers[j].FlowerId);
+                    flower.Number = flower.Number - (bouquet.Flowers[j].Number * order.BouquetInOrders[i].Number);
+                    _flowerPriceRepository.Update(flower);
+                }
+            }
+            for (int i = 0; i < order.BouquetInOrders.Count; i++)
+            {
+                Bouquet bouquet = _bouquetRepository.Get(order.BouquetInOrders[i].BouquetId);
+                PackagingPrice packaging = _packagingPriceRepository.GetPackagingPrice(bouquet.Packaging.PackagingId);
+                packaging.Number = packaging.Number - 1;
+                _packagingPriceRepository.Update(packaging);
+            }
             return order;
         }
     }

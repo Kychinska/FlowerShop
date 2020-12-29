@@ -12,6 +12,5 @@ namespace FlowerShop.Data.Repositories
         void AddPackaging(Packaging packaging);
         void RemovePackaging(int id);
         Packaging Get(int id);
-        List<Packaging> GetAllPackaging();
     }
 }

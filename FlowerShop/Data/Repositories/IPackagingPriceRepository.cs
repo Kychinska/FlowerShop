@@ -11,7 +11,6 @@ namespace FlowerShop.Data.Repositories
         void AddPrice(PackagingPrice packagingPrice);
         void RemoveFlowerPrice(int Id);
         PackagingPrice GetPackagingPrice(int packagingId);
-        List<PackagingPrice> GetAllPackagingPrices();
         void Update(PackagingPrice packagingPrice);
         int GetAvailablePacakagingNumber(int packagingId);
     }

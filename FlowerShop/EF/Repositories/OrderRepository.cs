@@ -18,13 +18,6 @@ namespace FlowerShop.EF.Repositories
                 ctx.SaveChanges();
             }
         }
-        public Order GetOrder(int orderId)
-        {
-            using (var ctx = new FlowerShopContext())
-            {
-                return ctx.Orders.Where(o => o.Id == orderId).Single();
-            }
-        }
 
         public void RemoveOrder(int orderId)
         {

@@ -19,14 +19,6 @@ namespace FlowerShop.EF.Repositories
             }
         }
 
-        public List<PackagingPrice> GetAllPackagingPrices()
-        {
-            using (var ctx = new FlowerShopContext())
-            {
-                return ctx.PackagingPrices.ToList();
-            }
-        }
-
         public PackagingPrice GetPackagingPrice(int packagingId)
         {
             using (var ctx = new FlowerShopContext())

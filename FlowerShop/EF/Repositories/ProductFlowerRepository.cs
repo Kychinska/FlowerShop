@@ -26,14 +26,6 @@ namespace FlowerShop.EF.Repositories
             }
         }
 
-        public List<ProductFlower> GetAllProductFlower()
-        {
-            using (var ctx = new FlowerShopContext())
-            {
-                return ctx.ProductFlowers.ToList();
-            }
-        }
-
         public void RemoveProductFlower(int id)
         {
             using (var ctx = new FlowerShopContext())

@@ -9,8 +9,6 @@ namespace FlowerShop.Domain.Interfaces
 {
     public interface IOrderFactory
     {
-        void ChangeNumberOfFlowersInData(Order order);
-        void ChangeNumberOfPackagingsInData(Order order);
         Order CreateOrder(List<BouquetInOrder> bouquetsInOrder, Client client, DateTime deliveryDate);
     }
 }
