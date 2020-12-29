@@ -20,11 +20,14 @@ namespace FlowerShop
 #region IRepositories
         protected IFlowerInShopDTORepository _flowerInShopDTORepository;
         protected IPackagingInShopDTORepository _packagingInShopDTORepository;
+        protected IBouquetRepository _bouquetRepository;
+        protected IOrderRepository _orderRepository;
         protected IFlowerPriceRepository _flowerPriceRepository;
         protected IPackagingPriceRepository _packagingPriceRepository;
 #endregion     
         protected List<BouquetInOrder> _BouquetsInOrder;
         public Form1(   IBouquetInOrderFactory bouquetInOrderFactory,
+                        IBouquetRepository bouquetRepository, IOrderRepository orderRepository,
                         IOrderFactory orderFactory,
                         IBouquetFactory bouquetFactory,
                         IFlowerInShopDTORepository flowerInShopDTORepository,
@@ -40,7 +43,8 @@ namespace FlowerShop
             _bouquetFactory = bouquetFactory;
             _bouquetInOrderFactory = bouquetInOrderFactory;
             _BouquetsInOrder = new List<BouquetInOrder>();
-
+            _orderRepository = orderRepository;
+            _bouquetRepository = bouquetRepository;
             InitializeComponent();           
             LoadData();
         }
@@ -111,6 +115,7 @@ namespace FlowerShop
             if (bouquet.Flowers.Count() > 0)
             {
                 _BouquetsInOrder.Add(_bouquetInOrderFactory.CreateBouquetInOrder(bouquet,bouquetsNumber));
+                _bouquetRepository.AddBouquet(bouquet);
             }
             dataGridView_BouquetInOrder.Rows.Clear();
             for(int j=0; j<_BouquetsInOrder.Count;j++)
@@ -159,6 +164,7 @@ namespace FlowerShop
             client.LastName = textBox_LastName.Text;
             client.Phone = textBox_Phone.Text;
             Order order = _orderFactory.CreateOrder(_BouquetsInOrder, client, dateTimePicker_DeliveryDate.Value);
+            _orderRepository.AddOrder(order);
             string str = string.Format("Your order id {0} and order price {1}", order.Id.ToString(), order.Price.ToString());
             MessageBox.Show(str);
         }

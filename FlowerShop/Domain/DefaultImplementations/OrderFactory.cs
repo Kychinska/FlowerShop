@@ -13,17 +13,15 @@ namespace FlowerShop.Domain.DefaultImplementations
         protected IBouquetRepository _bouquetRepository;
         protected IFlowerPriceRepository _flowerPriceRepository;
         protected IOrderPrice _orderPrice;
-        protected IOrderRepository _orderRepository;
         protected IPackagingPriceRepository _packagingPriceRepository;
         public OrderFactory(IBouquetRepository bouquetRepository,
                             IFlowerPriceRepository flowerPriceRepository, 
                             IPackagingPriceRepository packagingPriceRepository,
-                            IOrderPrice orderPrice, IOrderRepository orderRepository)
+                            IOrderPrice orderPrice)
         {
             _bouquetRepository = bouquetRepository;
             _flowerPriceRepository = flowerPriceRepository;
             _orderPrice = orderPrice;
-            _orderRepository = orderRepository;
             _packagingPriceRepository = packagingPriceRepository;
         }
         public void ChangeNumberOfFlowersInData(Order order)
@@ -58,7 +56,6 @@ namespace FlowerShop.Domain.DefaultImplementations
             order.DeliveryDate = deliveryDate;
             order.BouquetInOrders = bouquetsInOrder;
             order.Price = _orderPrice.CalculateOrderPrice(order);
-            _orderRepository.AddOrder(order);
             ChangeNumberOfFlowersInData(order);
             ChangeNumberOfPackagingsInData(order);
             return order;

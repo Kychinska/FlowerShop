@@ -10,15 +10,14 @@ namespace FlowerShop.Domain.DefaultImplementations
 {
     public class BouquetInOrderFactory : IBouquetInOrderFactory
     {
-        protected IBouquetRepository _bouquetRepository;
+
         protected IBoquetPrice _boquetPrice;
-        public BouquetInOrderFactory (IBouquetRepository bouquetRepository,IBoquetPrice boquetPrice)
+        public BouquetInOrderFactory (IBoquetPrice boquetPrice)
         {
-            _bouquetRepository = bouquetRepository;
             _boquetPrice = boquetPrice;
         }
         public BouquetInOrder CreateBouquetInOrder(Bouquet bouquet,int bouquetsNumber)
-        {   _bouquetRepository.AddBouquet(bouquet);      
+        {     
             BouquetInOrder bouquetInOrder = new BouquetInOrder();
             bouquetInOrder.BouquetId = bouquet.Id;
             bouquetInOrder.Number = bouquetsNumber;
