@@ -14,11 +14,24 @@ namespace FlowerShop.EF.Repositories
         {
             using (var ctx = new FlowerShopContext())
             {
-                return ctx.FlowerPrices.Join(ctx.Flowers, fp => fp.FlowerId, f => f.Id, (p, d) => new FlowerInShopDTO()
-                { FlowerId = d.Id, FlowerName = d.Name, FlowerPrice = p.PriceFlower, Color = d.Color,
-                    FlowerNumber = p.Number-ctx.Bouquets.Where(b=>DbFunctions.DiffMinutes(b.DateTimeOfCreateBouquet,DateTime.Now)<20)
-                    .Where(b=> !ctx.BouquetsInOrder.Any(bo=>bo.BouquetId==b.Id)).SelectMany(b=>b.Flowers).Where(f=>f.FlowerId==d.Id).Select(f=>f.Number)
-                    .DefaultIfEmpty(0).Sum()}).ToList();
+                return ctx.FlowerPrices.Join(
+                    ctx.Flowers, 
+                    fp => fp.FlowerId, 
+                    f => f.Id, 
+                    (p, d) => new FlowerInShopDTO()
+                        { 
+                            FlowerId = d.Id, 
+                            FlowerName = d.Name, 
+                            FlowerPrice = p.PriceFlower, 
+                            Color = d.Color,
+                            FlowerNumber = p.Number-ctx.Bouquets.Where(b=>DbFunctions.DiffMinutes(b.DateTimeOfCreateBouquet,DateTime.Now)<20)
+                            .Where(b=> !ctx.BouquetsInOrder.Any(bo=>bo.BouquetId==b.Id))
+                            .SelectMany(b=>b.Flowers)
+                            .Where(f=>f.FlowerId==d.Id)
+                            .Select(f=>f.Number)
+                            .DefaultIfEmpty(0).Sum()
+                         }
+                    ).ToList();
             }
         }
     }

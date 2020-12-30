@@ -14,10 +14,23 @@ namespace FlowerShop.EF.Repositories
         {
             using (var ctx = new FlowerShopContext())
             {
-                return ctx.PackagingPrices.Join(ctx.Packagings, pp => pp.PackagingId, p => p.Id, (pp, p) => new PackagingInShopDTO() 
-                { PackagingId=p.Id, Color=p.Color, Material=p.Material, Price= pp.PricePackaging,
-                  PackagingNumber = pp.Number - ctx.Bouquets.Where(b => DbFunctions.DiffMinutes(b.DateTimeOfCreateBouquet, DateTime.Now) < 20)
-                  .Where(b => !ctx.BouquetsInOrder.Any(bo => bo.BouquetId == b.Id)).Select( b=> b.Packaging).Where(x=>x.PackagingId==p.Id ).Count() }).ToList();               
+                return ctx.PackagingPrices.Join(
+                    ctx.Packagings, 
+                    pp => pp.PackagingId, 
+                    p => p.Id, 
+                    (pp, p) => new PackagingInShopDTO() 
+                        { 
+                            PackagingId=p.Id, 
+                            Color=p.Color, 
+                            Material=p.Material, 
+                            Price= pp.PricePackaging,
+                            PackagingNumber = pp.Number - ctx.Bouquets.Where(b => DbFunctions.DiffMinutes(b.DateTimeOfCreateBouquet, DateTime.Now) < 20)
+                            .Where(b => !ctx.BouquetsInOrder.Any(bo => bo.BouquetId == b.Id))
+                            .Select( b=> b.Packaging)
+                            .Where(x=>x.PackagingId==p.Id )
+                            .Count() 
+                          }
+                    ).ToList();               
                 }
         }
     }

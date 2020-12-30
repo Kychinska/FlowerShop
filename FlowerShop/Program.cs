@@ -24,7 +24,7 @@ namespace FlowerShop
             kernel.Bind<IProductPackagingRepository>().To<ProductPackagingRepository>();
             kernel.Bind<IPackagingPriceRepository>().To<PackagingPriceRepository>();
             kernel.Bind<IFlowerPriceRepository>().To<FlowerPriceRepository>();
-            kernel.Bind<IUser>().To<Form1>();
+            kernel.Bind<ICheckService>().To<CheckService>();
             kernel.Bind<IBoquetPrice>().To<BouquetPrice>();
             kernel.Bind<IOrderPrice>().To<OrderPrice>();
             kernel.Bind<IOrderFactory>().To<OrderFactory>();
@@ -46,7 +46,7 @@ namespace FlowerShop
             Kernel kernel = new Kernel();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run((Form1) kernel.kernel.Get<IUser>());
+            Application.Run((Form1) kernel.kernel.Get<Form1>());
         }
     }
 }

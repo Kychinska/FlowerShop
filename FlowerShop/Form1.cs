@@ -10,20 +10,21 @@ using FlowerShop.Data;
 
 namespace FlowerShop
 {
-    public partial class Form1 : Form, IUser
+    public partial class Form1 : Form
     {
 #region IFactories
         protected IOrderFactory _orderFactory;
         protected IBouquetFactory _bouquetFactory;
         protected IBouquetInOrderFactory _bouquetInOrderFactory;
+        #endregion
+#region IService
+        protected ICheckService _checkService;
 #endregion
 #region IRepositories
         protected IFlowerInShopDTORepository _flowerInShopDTORepository;
         protected IPackagingInShopDTORepository _packagingInShopDTORepository;
         protected IBouquetRepository _bouquetRepository;
         protected IOrderRepository _orderRepository;
-        protected IFlowerPriceRepository _flowerPriceRepository;
-        protected IPackagingPriceRepository _packagingPriceRepository;
 #endregion     
         protected List<BouquetInOrder> _BouquetsInOrder;
         public Form1(   IBouquetInOrderFactory bouquetInOrderFactory,
@@ -32,19 +33,18 @@ namespace FlowerShop
                         IBouquetFactory bouquetFactory,
                         IFlowerInShopDTORepository flowerInShopDTORepository,
                         IPackagingInShopDTORepository packagingInShopDTORepository,
-                        IFlowerPriceRepository flowerPriceRepository, 
-                        IPackagingPriceRepository packagingPriceRepository)
+                        ICheckService checkService
+                     )
         {
             _flowerInShopDTORepository = flowerInShopDTORepository;
-            _packagingInShopDTORepository = packagingInShopDTORepository;                       
-            _flowerPriceRepository = flowerPriceRepository;
-            _packagingPriceRepository = packagingPriceRepository;
+            _packagingInShopDTORepository = packagingInShopDTORepository;                  
             _orderFactory = orderFactory;
             _bouquetFactory = bouquetFactory;
             _bouquetInOrderFactory = bouquetInOrderFactory;
             _BouquetsInOrder = new List<BouquetInOrder>();
             _orderRepository = orderRepository;
             _bouquetRepository = bouquetRepository;
+            _checkService = checkService;
             InitializeComponent();           
             LoadData();
         }
@@ -106,7 +106,7 @@ namespace FlowerShop
             Bouquet bouquet = _bouquetFactory.CreateBouquet(productFlowers, textBox_Message.Text,productPackaging);
             
             int bouquetsNumber = Convert.ToInt32(textBox_NumberOfBouquets.Text);
-            if (CheckBouquetsNumber(bouquetsNumber,bouquet))
+            if (_checkService.CheckBouquetsNumber(bouquetsNumber,bouquet))
             {
                 MessageBox.Show("Sorry, but we can`t to do so much bouqets");
                 textBox_NumberOfBouquets.Text = string.Empty;
@@ -128,26 +128,7 @@ namespace FlowerShop
             }
             LoadData();
         }
-        private bool CheckBouquetsNumber(int bouquetsNumber, Bouquet bouquet)
-        {
-            if (bouquetsNumber < 1)
-            {
-                bouquetsNumber = 1;
-            }
-            foreach (var flower in bouquet.Flowers)
-            {
-                int requestedNumber = flower.Number * bouquetsNumber;
-                if (requestedNumber > _flowerPriceRepository.GetAvailableFlowerNumber(flower.FlowerId))
-                {
-                    return true;
-                }
-            }
-            if (bouquetsNumber > _packagingPriceRepository.GetAvailablePacakagingNumber(bouquet.PackagingId))
-            {                
-                return true;
-            }
-            return false;
-        }
+        
         private void dataGridViewPacking_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             for (int i = 0; i < dataGridViewPacking.Rows.Count; i++)
